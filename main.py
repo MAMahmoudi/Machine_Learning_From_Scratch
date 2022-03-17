@@ -13,6 +13,7 @@ from src.Ridge_Regression import Ridge_Regression
 from src.Naive_Bayes import Naive_Bayes
 from src.Perceptron import Perceptron
 from src.SVM import SVM
+from src.Decision_Tree import Decision_Tree
 # cmap = ListedColormap(['#FF0000','#00FF00','#0000FF'])
 
 # iris = datasets.load_iris()
@@ -21,9 +22,15 @@ from src.SVM import SVM
 # X, y = datasets.make_classification(n_samples=1000,n_features=10,n_classes=2,random_state=123)
 # X, y = datasets.make_blobs(n_samples=150,n_features=2,centers=2,cluster_std=1.05,random_state=2)
 # X, y = datasets.make_blobs(n_samples=50, n_features=2, centers=2, cluster_std=1.05, random_state=40)
-# BC = datasets.load_breast_cancer()
-# X, y = BC.data, BC.target
+BC = datasets.load_breast_cancer()
+X, y = BC.data, BC.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
+
+################ Decision_Tree #######################
+clf = Decision_Tree(max_depth=10)
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+print("The Decision Tree classification accuracy", accuracy(y_test,y_pred))
 
 ################ SVM #######################
 # y = np.where(y == 0, -1, 1)

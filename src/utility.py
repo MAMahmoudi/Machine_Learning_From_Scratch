@@ -25,3 +25,4 @@ def plot_learning_curve(model, X_train, X_test, y_train, y_test):
     plt.plot(np.sqrt(train_errors), "r-+", linewidth=2, label="Training")
     plt.plot(np.sqrt(validation_errors), "b-", linewidth=2, label="Validation")
     plt.show()
+
