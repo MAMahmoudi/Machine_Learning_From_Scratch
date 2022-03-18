@@ -14,6 +14,7 @@ from src.Naive_Bayes import Naive_Bayes
 from src.Perceptron import Perceptron
 from src.SVM import SVM
 from src.Decision_Tree import Decision_Tree
+from src.Random_Forest import Random_Forest
 # cmap = ListedColormap(['#FF0000','#00FF00','#0000FF'])
 
 # iris = datasets.load_iris()
@@ -26,11 +27,18 @@ BC = datasets.load_breast_cancer()
 X, y = BC.data, BC.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
 
-################ Decision_Tree #######################
-clf = Decision_Tree(max_depth=10)
+################ Random Forest #######################
+
+clf = Random_Forest(n_trees=3, max_depth=10)
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
-print("The Decision Tree classification accuracy", accuracy(y_test,y_pred))
+print("The Random Forest classification accuracy", accuracy(y_test,y_pred))
+
+# ################ Decision_Tree #######################
+# clf = Decision_Tree(max_depth=10)
+# clf.fit(X_train, y_train)
+# y_pred = clf.predict(X_test)
+# print("The Decision Tree classification accuracy", accuracy(y_test,y_pred))
 
 ################ SVM #######################
 # y = np.where(y == 0, -1, 1)
