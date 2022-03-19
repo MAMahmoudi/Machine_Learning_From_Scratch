@@ -18,6 +18,7 @@ from src.Random_Forest import Random_Forest
 from src.PCA import PCA
 from src.K_Means import K_Means
 from src.AdaBoost import AdaBoost
+from src.LDA import LDA
 # cmap = ListedColormap(['#FF0000','#00FF00','#0000FF'])
 
 # iris = datasets.load_iris()
@@ -28,18 +29,31 @@ from src.AdaBoost import AdaBoost
 # X, y = datasets.make_blobs(n_samples=50, n_features=2, centers=2, cluster_std=1.05, random_state=40)
 # X, y = datasets.make_blobs(centers=3, n_samples=500, n_features=2, shuffle=True, random_state=40)
 
-BC = datasets.load_breast_cancer()
-X, y = BC.data, BC.target
-y[y == 0] = -1
+# BC = datasets.load_breast_cancer()
+# X, y = BC.data, BC.target
+# y[y == 0] = -1
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
 
-################ AdaBoost #######################
-clf = AdaBoost(n_classifier=5)
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
 
-acc = accuracy(y_test, y_pred)
-print("Accuracy:", acc)
+################ LDA #######################
+# lda = LDA(2)
+# lda.fit(X, y)
+# X_projected = lda.transform(X)
+# print("Shape of X:", X.shape)
+# print("Shape of transformed X:", X_projected.shape)
+# x1, x2 = X_projected[:, 0], X_projected[:, 1]
+# plt.scatter(x1, x2, c=y, edgecolor="none", alpha=0.8, cmap=plt.cm.get_cmap("viridis", 3))
+# plt.xlabel("Linear Discriminant 1")
+# plt.ylabel("Linear Discriminant 2")
+# plt.colorbar()
+# plt.show()
+################ AdaBoost #######################
+# clf = AdaBoost(n_classifier=5)
+# clf.fit(X_train, y_train)
+# y_pred = clf.predict(X_test)
+#
+# acc = accuracy(y_test, y_pred)
+# print("Accuracy:", acc)
 ################ K_Means #######################
 # print(X.shape)
 # clusters = len(np.unique(y))
