@@ -16,32 +16,41 @@ from src.SVM import SVM
 from src.Decision_Tree import Decision_Tree
 from src.Random_Forest import Random_Forest
 from src.PCA import PCA
+from src.K_Means import K_Means
 # cmap = ListedColormap(['#FF0000','#00FF00','#0000FF'])
 
-iris = datasets.load_iris()
-X, y = iris.data, iris.target
+# iris = datasets.load_iris()
+# X, y = iris.data, iris.target
 # X, y = datasets.make_regression(n_samples=100,n_features=1,noise=20,random_state=4)
 # X, y = datasets.make_classification(n_samples=1000,n_features=10,n_classes=2,random_state=123)
 # X, y = datasets.make_blobs(n_samples=150,n_features=2,centers=2,cluster_std=1.05,random_state=2)
 # X, y = datasets.make_blobs(n_samples=50, n_features=2, centers=2, cluster_std=1.05, random_state=40)
+X, y = datasets.make_blobs(centers=3, n_samples=500, n_features=2, shuffle=True, random_state=40)
+
 # BC = datasets.load_breast_cancer()
 # X, y = BC.data, BC.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
 
-
+################ K_Means #######################
+print(X.shape)
+clusters = len(np.unique(y))
+print(clusters)
+k = K_Means(k=clusters, max_iterations=150, plot_steps=True)
+y_pred = k.predict(X)
+k.plot()
 ################ PCA #######################
-pca = PCA(2)
-pca.fit(X)
-X_projected = pca.transform(X)
-print("Shape of X:", X.shape)
-print("Shape of transformed X:", X_projected.shape)
-x1 = X_projected[:, 0]
-x2 = X_projected[:, 1]
-plt.scatter(x1, x2, c=y, edgecolor="none", alpha=0.8, cmap=plt.cm.get_cmap("viridis", 3))
-plt.xlabel("Principal Component 1")
-plt.ylabel("Principal Component 2")
-plt.colorbar()
-plt.show()
+# pca = PCA(2)
+# pca.fit(X)
+# X_projected = pca.transform(X)
+# print("Shape of X:", X.shape)
+# print("Shape of transformed X:", X_projected.shape)
+# x1 = X_projected[:, 0]
+# x2 = X_projected[:, 1]
+# plt.scatter(x1, x2, c=y, edgecolor="none", alpha=0.8, cmap=plt.cm.get_cmap("viridis", 3))
+# plt.xlabel("Principal Component 1")
+# plt.ylabel("Principal Component 2")
+# plt.colorbar()
+# plt.show()
 ################ Random Forest #######################
 
 # clf = Random_Forest(n_trees=3, max_depth=10)
