@@ -17,6 +17,7 @@ from src.Decision_Tree import Decision_Tree
 from src.Random_Forest import Random_Forest
 from src.PCA import PCA
 from src.K_Means import K_Means
+from src.AdaBoost import AdaBoost
 # cmap = ListedColormap(['#FF0000','#00FF00','#0000FF'])
 
 # iris = datasets.load_iris()
@@ -25,19 +26,27 @@ from src.K_Means import K_Means
 # X, y = datasets.make_classification(n_samples=1000,n_features=10,n_classes=2,random_state=123)
 # X, y = datasets.make_blobs(n_samples=150,n_features=2,centers=2,cluster_std=1.05,random_state=2)
 # X, y = datasets.make_blobs(n_samples=50, n_features=2, centers=2, cluster_std=1.05, random_state=40)
-X, y = datasets.make_blobs(centers=3, n_samples=500, n_features=2, shuffle=True, random_state=40)
+# X, y = datasets.make_blobs(centers=3, n_samples=500, n_features=2, shuffle=True, random_state=40)
 
-# BC = datasets.load_breast_cancer()
-# X, y = BC.data, BC.target
+BC = datasets.load_breast_cancer()
+X, y = BC.data, BC.target
+y[y == 0] = -1
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
 
+################ AdaBoost #######################
+clf = AdaBoost(n_classifier=5)
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+
+acc = accuracy(y_test, y_pred)
+print("Accuracy:", acc)
 ################ K_Means #######################
-print(X.shape)
-clusters = len(np.unique(y))
-print(clusters)
-k = K_Means(k=clusters, max_iterations=150, plot_steps=True)
-y_pred = k.predict(X)
-k.plot()
+# print(X.shape)
+# clusters = len(np.unique(y))
+# print(clusters)
+# k = K_Means(k=clusters, max_iterations=150, plot_steps=True)
+# y_pred = k.predict(X)
+# k.plot()
 ################ PCA #######################
 # pca = PCA(2)
 # pca.fit(X)
